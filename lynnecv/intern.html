@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ROSELINE DANGAZELA</title>
+    <!-- link styles -->
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <style>
+        body {
+            margin: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        .banner {
+            display: flex;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .profile-pic {
+            background-color: white;
+            padding: 20px;
+        }
+
+        .profile-pic img {
+            width: 150px;
+            height: 140px;
+            border-radius: 5px;
+            /* border: 2px solid #6e6d67; */
+            object-fit: cover;
+            margin-left: 40px;
+        }
+
+        .info {
+            background-color: grey;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: 120px;
+        }
+
+        .info h1 {
+            margin: 0;
+            font-size: 42px;
+            line-height: 1.6;
+        }
+
+        .info h2 {
+            margin: 10px 0 0;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 1.6;
+            padding-bottom: 10px;
+        }
+
+        .body-section {
+            display: block;
+            margin-left: 120px;
+            margin-top: 20px;
+        }
+
+        .highlighted-title1 h2 {
+            width: 160px;
+            height: 25px;
+            background-color: #181815;
+            color: #ffffff;
+            /* text-align: center; */
+            padding-top: 5px;
+            padding-left: 10px;
+            font-weight: normal;
+
+        }
+
+        h2 {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .highlighted-title1 .email {
+            padding-top: 5px;
+            text-decoration: underline;
+        }
+
+        .highlighted-title1 .email:hover {
+            color: #0000ff;
+        }
+
+        .highlighted-title1 p {
+            margin: 0;
+        }
+
+        .highlighted-title1 {
+            margin-bottom: 50px;
+        }
+
+        .highlighted-title2 {
+            padding-bottom: 40px;
+        }
+
+        .highlighted-title2 h2 {
+            width: 210px;
+            height: 25px;
+            background-color: #181815;
+            color: #ffffff;
+            /* text-align: center; */
+            padding-top: 5px;
+            padding-left: 10px;
+            font-weight: normal;
+        }
+
+        .highlighted-title2 p {
+            margin: 0;
+            max-width: 72%;
+            line-height: 1.6;
+        }
+
+        .highlighted-title3 h2 {
+            width: 150px;
+            height: 25px;
+            background-color: #181815;
+            color: #ffffff;
+            /* text-align: center; */
+            padding-top: 5px;
+            padding-left: 10px;
+            font-weight: normal;
+        }
+
+        .highlighted-title3 b {
+            margin: 0;
+            max-width: 72%;
+            line-height: 1.6;
+            padding: auto;
+
+        }
+
+        span {
+            padding-top: 20px;
+            max-width: 72%;
+            color: grey;
+            line-height: 1.6;
+        }
+
+        .highlighted-title3 ul {
+            margin: 0;
+            max-width: 72%;
+            line-height: 1.6;
+        }
+
+        .highlighted-title4 h2 {
+            width: 110px;
+            height: 25px;
+            background-color: #181815;
+            color: #ffffff;
+            /* text-align: center; */
+            padding-top: 5px;
+            padding-left: 10px;
+            font-weight: normal;
+        }
+
+        .highlighted-title4 .current {
+            margin: 0;
+            max-width: 72%;
+            line-height: 1.6;
+        }
+
+        .highlighted-title5 h2 {
+            width: 60px;
+            height: 25px;
+            background-color: #181815;
+            color: #ffffff;
+            /* text-align: center; */
+            padding-top: 5px;
+            padding-left: 10px;
+            /* margin-bottom: 30px; */
+            margin-top: 50px;
+            /* font-weight: normal; */
+        }
+
+        .listfoursty ul {
+            columns: 3;
+            -webkit-columns: 3;
+            -moz-columns: 3;
+            column-gap: 40px;
+            /* list-style-type: none; */
+            padding: 0;
+            margin: 0;
+        }
+
+        .listfoursty li {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .highlighted-title6 h2 {
+            width: 70px;
+            height: 25px;
+            background-color: #181815;
+            color: #ffffff;
+            /* text-align: center; */
+            padding-top: 5px;
+            padding-left: 10px;
+            /* font-weight: normal; */
+        }
+
+        .highlighted-title6 a {
+            margin: 0;
+            max-width: 72%;
+            line-height: 1.6;
+            text-decoration: none;
+            color: #717175;
+        }
+
+        .highlighted-title7 h2 {
+            width: 140px;
+            height: 25px;
+            background-color: #181815;
+            color: #ffffff;
+            /* text-align: center; */
+            padding-top: 5px;
+            padding-left: 10px;
+            /* font-weight: normal; */
+        }
+
+        .highlighted-title7 {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="banner">
+        <div class="profile-pic">
+            <img src="profilr.png" alt="Profile Image" class="profile-image">
+        </div>
+        <div class="info">
+            <h1>ROSELINE<br>DANGAZELA</h1>
+            <h2>Software Engineer</h2>
+        </div>
+    </div>
+    <div class="body-section">
+        <div class="highlighted-title1">
+            <h2>
+                PERSONAL DETAILS
+            </h2>
+            <P><b>C</b>ontact</P>
+            <p mailto="roseline.danga@gmail.com" class="email">roseline.danga@gmail.com</p>
+            <p tel="+27 745663399" class="phone"> +27 745663399</p>
+        </div>
+        <div class="highlighted-title2">
+            <h2> PROFESSIONAL SUMMARY</h2>
+            <p>
+                Energetic and passionate IT graduate with strong technical and troubleshooting skills,
+                seeking an opportunity to contribute to the Companies Tribunal as an ICT Intern.
+                Proficient in providing user support, system maintenance,
+                and network security. Committed to continuous learning and delivering excellent
+                customer service in a professional environment.
+            </p>
+        </div>
+        <div class="highlighted-title3">
+            <h2>
+                WORK EXPERIENCE
+            </h2>
+            <div>
+                <b style="text-transform: uppercase;">
+                    Full Stack Developer | Contract Ontime Solutions, Johannesburg
+                </b>
+                <br><span>10/2024 - Present </span>
+
+                <p>
+                <ul>
+                    <li>
+                        Engineering and deploying full-stack applications using React,
+                        Redux.js, JavaScript, Tailwind CSS, and Express.js,
+                        enhancing user experience and application performance.
+                    </li>
+                    <li>
+                        Provided technical support for web applications and internal systems.
+                    </li>
+                    <li>
+                        Optimizing server operations with Nginx and AWS Cloud significantly
+                        improves system reliability and performance.
+                    </li>
+                    <li>
+                        Installed, configured, and managed software environments.
+                    </li>
+                    <li>
+                        Troubleshot technical issues to improve system performance.
+                    </li>
+                </ul>
+                </p>
+
+                <b>
+                    PROCUMENT ANALYST HINC GROUP PYT LTD, PRETORIA | REMOTE
+                </b>
+                <br>
+                <span>
+                    04/2024 - 03/2025
+                </span>
+                <p>
+                <ul>
+                    <li>
+                        Determined consumer needs to provide products and services
+                        appealing to larger market.
+                    </li>
+                    <li>
+                        Provided technical and administrative support across departments.
+                    </li>
+                    <li>
+                        Monitored operations and reviewed records and metrics to understand
+                        company performance.
+                    </li>
+                    <li>
+                        Coordinated operations and conducted system performance reviews.
+                    </li>
+
+                </ul>
+                </p>
+
+            </div>
+
+
+        </div>
+        <hr>
+        <br>
+        <br>
+
+        <div class="highlighted-title4">
+            <h2>EDUCATION</h2>
+            <div class="current">
+                <div>
+                    <b style="text-transform: uppercase;">
+                        BACHELOR OF SCIENCE IN COMPUTER SCIENCE | 
+                        UNIVERSITY OF PEOPLE, Pasadena, California, U S A
+                    </b>
+                    <span> 01/2024 - Present</span>
+                </div>
+                <hr>
+                <div>
+                    <b style="text-transform: uppercase;">
+                        Software Engineering Bootcamp |
+                        ALX-AFRICA / HOLBERTON, Remote, South Africa
+                    </b><br>
+                    <span> 10/2022 – 04/2024</span>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <div class="highlighted-title5">
+            <h2>
+                SKILLS
+            </h2>
+            <div class="listfoursty">
+                <ul>
+                    <li>
+                        Microsoft Office
+                    </li>
+                    <li>
+                        Customer Service & Help Desk Support
+                    </li>
+                    <li>
+                        Installation and Configuration
+                    </li>
+                    <li>
+                        ICT Security and Monitoring
+                    </li>
+                    <li>
+                        Node.js & Express.js
+                    </li>
+                    <li>
+                        Python, DJANGO & FLASK
+                    </li>
+                    <li>
+                        JavaScript, React.js & Redux.js
+                    </li>
+                    <li>
+                        Tailwind CSS & Bootstrap
+                    </li>
+                    <li>
+                        SQL & NoSQL
+                    </li>
+                    <li>
+                        Git & Version Control
+                    </li>
+                    <li>
+                        Shell Scripting
+                    </li>
+                    <li>
+                        Technical & Analytical Skills
+                    </li>
+                </ul>
+            </div>
+            <hr>
+        </div>
+        <br>
+        <div class="highlighted-title6">
+            <h2> LINKS </h2>
+            <a href="">Github</a><br>
+            <a href="">LinkedIn Profile</a>
+        </div>
+        <hr>
+        <br>
+        <div class="highlighted-title7">
+            <h2 style="text-transform: uppercase;">Apprenticeships</h2>
+            <div>
+                <b style="text-transform: uppercase;">
+                    Software Engineering Virtual Experience | Forage
+                </b>
+                <p><span>Skyscanner via Forage | November 2023</span></p>
+                <ul>
+                    <li>
+                        Completed a job simulation project simulating work as a front-end engineer.
+                    </li>
+                    <li>
+                        Built a web application using React.js, incorporating Skyscanner’s Backpack React library.
+                    </li>
+                    <li>
+                        Developed a functional travel date picker page, customized UI elements, and ensured
+                        usability.
+                    </li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <div>
+                <b style="text-transform: uppercase;">
+                    Developer Apprentice | Forage
+                </b>
+                <p><span>Accenture via Forage | December 2023</span></p>
+                <ul>
+                    <li>
+                        Participated in troubleshooting technical issues and providing user support.
+                    </li>
+                    <li>
+                        Assisted in the installation and maintenance of software systems.
+                    </li>
+                    <li>
+                        Developed strong skills in teamwork, IT system analysis, and client communication.
+                    </li>
+                </ul>
+            </div>
+            <hr>
+            <div>
+                <b style="text-transform: uppercase;">
+                    Developer and Technology Apprentice | Forage
+                </b>
+                <p><span>Accenture via Forage | December 2023</span></p>
+                <ul>
+                    <li>
+                        Supported system performance monitoring and basic network setup tasks.
+                    </li>
+                    <li>
+                        Contributed to hardware and software maintenance under supervision.
+                    </li>
+                    <li>
+                        Improved technical documentation and system troubleshooting skills.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>

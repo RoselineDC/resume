@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Search Automator Dashboard</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .header-text p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .status-badge {
+            background-color: #dbeafe;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Controls */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .controls h2 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button.secondary {
+            background-color: white;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        button.secondary:hover {
+            background-color: var(--bg-body);
+        }
+
+        /* Results Area */
+        .results-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background-color: #f1f5f9;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Tags */
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .tag.py { background-color: #e0e7ff; color: #4338ca; }
+        .tag.js { background-color: #fef3c7; color: #b45309; }
+        .tag.exp { background-color: #dcfce7; color: #15803d; }
+
+        /* Keywords Column */
+        .keywords-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .keyword-pill {
+            background: #f1f5f9;
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Email Preview Section */
+        .email-section {
+            margin-top: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .email-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .email-body-preview {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            font-size: 0.85rem;
+            color: #334155;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--text-main);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(150%);
+            transition: transform 0.3s ease-out;
+            z-index: 100;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        /* Loading State */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255,255,255,0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            backdrop-filter: blur(2px);
+            z-index: 10;
+            display: none;
+        }
+
+        .table-wrapper {
+            position: relative;
+        }
+        
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            th, td {
+                font-size: 0.8rem;
+                padding: 0.75rem 0.5rem;
+            }
+            .keyword-pill {
+                display: none; /* Hide excessive pills on small mobile */
+            }
+            .keyword-pill:first-child {
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <header>
+            <div class="header-text">
+                <h1>Job Hunter Automator</h1>
+                <p>Remote Python & JS Developer Agent</p>
+            </div>
+            <div class="status-badge">
+                <div class="status-dot"></div>
+                <span id="nextRunText">Next Run: Today at 3:00 PM</span>
+            </div>
+        </header>
+
+        <!-- Controls / Configuration -->
+        <section class="controls">
+            <div class="card">
+                <h2>Search Configuration</h2>
+                <div class="filter-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked id="checkPy"> Python Dev
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" checked id="checkJs"> JavaScript Dev
+                    </label>
+                </div>
+                <div style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                    Target Experience: 0-2 Years
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button onclick="runSearch()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        Run Search Now
+                    </button>
+                    <button class="secondary" onclick="resetData()">Reset</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Automation Log</h2>
+                <ul id="logList" style="list-style: none; font-size: 0.85rem; color: var(--text-muted); height: 100px; overflow-y: auto;">
+                    <li>[System] Automator initialized.</li>
+                    <li>[System] Waiting for scheduled 3 PM trigger...</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Results Table -->
+        <section class="results-section">
+            <div class="table-wrapper">
+                <div class="loading-overlay" id="loadingOverlay">Scanning Web Sources...</div>
+                <div class="table-container">
+                    <table id="jobTable">
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>Company</th>
+                                <th>Tech Stack</th>
+                                <th>Experience</th>
+                                <th>Direct Link</th>
+                                <th>5 Keywords (Resume Tweaks)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Rows will be injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Email Preview -->
+        <section class="email-section">
+            <div class="email-header">
+                <h3>Email Draft Preview</h3>
+                <button class="secondary" onclick="copyEmail()" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">Copy to Clipboard</button>
+            </div>
+            <div class="email-body-preview" id="emailContent">
+                Waiting for search results...
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Email copied to clipboard!</div>
+
+    <script>
+        // --- Mock Data Sources ---
+        // In a real app, this would come from an API or Web Scraper.
+        const database = [
+            {
+                id: 1,
+                role: "Junior Python Developer",
+                company: "CloudScale Solutions",
+                stack: "Python",
+                exp: "Entry Level",
+                link: "https://cloudscale.io/careers/junior-py-123",
+                description: "Looking for a junior developer with 1 year of experience. Must know Django, REST APIs, and PostgreSQL. Git knowledge is required."
+            },
+            {
+                id: 2,
+                role: "Frontend Engineer (React)",
+                company: "WebFlow Inc",
+                stack: "JavaScript",
+                exp: "1-2 Years",
+                link: "https://webflow.inc/jobs/react-dev-99",
+                description: "We need a frontend engineer skilled in React, JavaScript (ES6+), HTML5, CSS3. Experience with Redux and Tailwind is a plus."
+            },
+            {
+                id: 3,
+                role: "Backend Support Engineer",
+                company: "DataSystems",
+                stack: "Python",
+                exp: "0-1 Years",
+                link: "https://datasys.com/jobs/backend-support",
+                description: "Support our backend team using Python, Flask, and AWS. Knowledge of Docker and CI/CD pipelines is highly desired."
+            },
+            {
+                id: 4,
+                role: "Junior JavaScript Developer",
+                company: "CreativeAgency",
+                stack: "JavaScript",
+                exp: "Entry Level",
+                link: "https://creative.agency/careers/js-dev",
+                description: "Join our creative team! Needs strong fundamentals in JavaScript, DOM manipulation, and modern web APIs. jQuery is a bonus."
+            },
+            {
+                id: 5,
+                role: "Python Scripting Intern",
+                company: "AutoTech Global",
+                stack: "Python",
+                exp: "Student/Grad",
+                link: "https://autotech.global/interns",
+                description: "Automate internal tools using Python. Requires knowledge of Pandas, NumPy, CSV handling, and basic Linux commands."
+            }
+        ];
+
+        // --- Core Logic ---
+
+        // 1. Keyword Extraction Logic
+        // This function scans the description and picks out tech terms to simulate "analysis"
+        function extractKeywords(description) {
+            const commonTech = [
+                "Python", "Django", "Flask", "REST", "API", "SQL", "PostgreSQL", "Git", 
+                "AWS", "Docker", "React", "JavaScript", "HTML", "CSS", "Redux", "Tailwind", 
+                "Node.js", "TypeScript", "Linux", "CI/CD", "Pandas", "NumPy", "DOM", "ES6+"
+            ];
+            
+            const found = commonTech.filter(tech => {
+                // Case insensitive search
+                const regex = new RegExp(tech, 'i');
+                return description.match(regex);
+            });
+
+            // Return top 5 unique keywords
+            return [...new Set(found)].slice(0, 5);
+        }
+
+        // 2. Render Table
+        function renderTable(jobs) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            if (jobs.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 2rem; color: var(--text-muted);">No jobs found matching current filters.</td></tr>`;
+                return;
+            }
+
+            jobs.forEach(job => {
+                const keywords = extractKeywords(job.description);
+                const stackTag = job.stack === 'Python' ? 'py' : 'js';
+                
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td style="font-weight: 600;">${job.role}</td>
+                    <td>${job.company}</td>
+                    <td><span class="tag ${stackTag}">${job.stack}</span></td>
+                    <td><span class="tag exp">${job.exp}</span></td>
+                    <td><a href="${job.link}" target="_blank" style="color: var(--primary); text-decoration: none; font-size: 0.85rem;">View Job &rarr;</a></td>
+                    <td>
+                        <div class="keywords-box">
+                            ${keywords.map(k => `<span class="keyword-pill">${k}</span>`).join('')}
+                            ${keywords.length === 0 ? '<span style="font-size:0.75rem; color:#94a3b8;">N/A</span>' : ''}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // 3. Generate Email Content
+        function generateEmail(jobs) {
+            if (jobs.length === 0) return "Subject: Daily Job Update - No results found\n\nNo jobs matched your criteria today.";
+
+            let email = `Subject: Daily Job Update - ${new Date().toLocaleDateString()}\n\n`;
+            email += `Here are the remote software development jobs found for you today (< 2 years exp):\n\n`;
+
+            jobs.forEach((job, index) => {
+                const keywords = extractKeywords(job.description).join(", ");
+                email += `${index + 1}. ${job.role} at ${job.company}\n`;
+                email += `   Link: ${job.link}\n`;
+                email += `   Top Keywords for Resume: ${keywords}\n\n`;
+            });
+
+            email += `---\nGenerated by Job Hunter Automator.`;
+            return email;
+        }
+
+        // 4. Run Search Function (Simulation)
+        function runSearch() {
+            const includePy = document.getElementById('checkPy').checked;
+            const includeJs = document.getElementById('checkJs').checked;
+            const loading = document.getElementById('loadingOverlay');
+            const logList = document.getElementById('logList');
+
+            // UI Feedback
+            loading.style.display = 'flex';
+            logList.innerHTML += `<li>[${new Date().toLocaleTimeString()}] Starting search...</li>`;
+            
+            // Simulate Network Delay
+            setTimeout(() => {
+                let filtered = database.filter(job => {
+                    if (job.stack === 'Python' && includePy) return true;
+                    if (job.stack === 'JavaScript' && includeJs) return true;
+                    return false;
+                });
+
+                renderTable(filtered);
+                
+                const emailText = generateEmail(filtered);
+                document.getElementById('emailContent').textContent = emailText;
+
+                loading.style.display = 'none';
+                logList.innerHTML += `<li>[${new Date().toLocaleTimeString()}] Search complete. Found ${filtered.length} jobs.</li>`;
+                logList.scrollTop = logList.scrollHeight;
+            }, 1200);
+        }
+
+        // 5. Helper Functions
+        function copyEmail() {
+            const text = document.getElementById('emailContent').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            });
+        }
+
+        function resetData() {
+            document.getElementById('checkPy').checked = true;
+            document.getElementById('checkJs').checked = true;
+            runSearch();
+        }
+
+        // --- Initialization ---
+        window.onload = function() {
+            // Provide the "First Example" immediately as requested
+            console.log("Initializing Job Search Automator...");
+            runSearch();
+        };
+
+    </script>
+</body>
+</html>
