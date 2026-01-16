@@ -6,11 +6,11 @@ const fs = require('fs');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  const filePath = path.resolve(__dirname, 'mom.html');
+  const filePath = path.resolve(__dirname, 'ModifiedSE.html');
   await page.goto(`file://${filePath}`, { waitUntil: 'networkidle0' });
 
   // Define a clean output folder name
-  const outputDir = path.resolve(__dirname, 'Sihle_Dangazela_Waitress');
+  const outputDir = path.resolve(__dirname, 'ROSELINE');
   
   // Create the folder if it doesn’t exist
   if (!fs.existsSync(outputDir)) {
@@ -18,7 +18,7 @@ const fs = require('fs');
   }
 
   // Save the PDF safely inside the folder
-  const outputFile = path.join(outputDir, 'Kitchen_Staff_CV.pdf');
+  const outputFile = path.join(outputDir, 'Roseline Dangazela Junior Software Engineer (Full-Stack).pdf');
 
   await page.pdf({
     path: outputFile,

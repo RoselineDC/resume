@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Sihle Dangazela</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #333333;
+            --accent-color: #E0E0E0;
+            --bg-color: #F8F8F8;
+            --text-color: #222222;
+            --card-bg: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .poster-container {
+            width: 100%;
+            height: auto;
+            background-color: var(--bg-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Decorative Header */
+        .header-decor {
+            height: 200px;
+            background: linear-gradient(135deg, #000000, #333333);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            border-bottom-left-radius: 50% 20px;
+            border-bottom-right-radius: 50% 20px;
+        }
+
+        .header-decor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 10%),
+                              radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 10%);
+        }
+
+        .profile-initials {
+            width: 90px;
+            height: 90px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            margin-bottom: 12px;
+            border: 3px solid rgba(255,255,255,0.5);
+        }
+
+        .cv-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .main-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .job-title {
+            font-size: 16px;
+            background-color: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            padding: 25px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 8px;
+        }
+
+        .section-title .material-icons {
+            font-size: 22px;
+            color: var(--secondary-color);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-label {
+            font-size: 13px;
+            color: #555555;
+            font-weight: 500;
+            min-width: 90px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-left: 102px;
+        }
+
+        .tag {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .profile-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+
+        .skill-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+        }
+
+        .experience-content {
+        }
+
+        .exp-position {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .exp-duties {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--text-color);
+        }
+
+        .reference-text {
+            font-size: 14px;
+            color: var(--text-color);
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #9e9e9e;
+            font-size: 11px;
+            margin-top: auto;
+        }
+
+        /* Layout adjustment for single page full height */
+        .poster-container {
+            justify-content: flex-start;
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+    <!-- Header -->
+    <div class="header-decor">
+        <div class="profile-initials">SD</div>
+        <div class="cv-title">Curriculum Vitae</div>
+        <h1 class="main-name">Sihle Dangazela</h1>
+        <div class="job-title">House Helper / Maid</div>
+    </div>
+
+    <!-- Content -->
+    <div class="content-area">
+        
+        <!-- Personal Details Section -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="material-icons">person</i>
+                PERSONAL DETAILS
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div>
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">Sihle Dangazela</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div>
+                        <div class="info-label">Nationality</div>
+                        <div class="info-value">Zimbabwean</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div>
+                        <div class="info-label">Gender</div>
+                        <div class="info-value">Female</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div style="width: 100%;">
+                        <div class="info-label" style="margin-bottom: 5px;">Languages</div>
+                        <div class="tag-container" style="margin-left: 102px;">
+                            <span class="tag">English</span>
+                            <span class="tag">isiZulu</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Details Section -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="material-icons">contact_mail</i>
+                CONTACT DETAILS
+            </div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div>
+                        <div class="info-label">Location</div>
+                        <div class="info-value">Pretoria, South Africa</div>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div>
+                        <div class="info-label">Contact</div>
+                        <div class="info-value">074 566 3399</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="material-icons">account_circle</i>
+                PROFILE
+            </div>
+            <p class="profile-text">
+                Reliable and hardworking house helper with experience in general cleaning, laundry, ironing, and maintaining a neat home environment. Trustworthy, punctual, and able to work independently.
+            </p>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="material-icons">stars</i>
+                SKILLS
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div class="skill-dot"></div>
+                    <span>House cleaning &amp; hygiene</span>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-dot"></div>
+                    <span>Laundry and ironing</span>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-dot"></div>
+                    <span>Time management</span>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-dot"></div>
+                    <span>Attention to detail</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Work Experience Section -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="material-icons">work</i>
+                WORK EXPERIENCE
+            </div>
+            <div class="experience-content">
+                <div class="exp-position">Position: House Helper</div>
+                <div class="exp-duties">
+                    Cleaning, laundry, ironing, and general household duties
+                </div>
+            </div>
+        </div>
+
+        <!-- References Section -->
+        <div class="section-card">
+            <div class="section-title">
+                <i class="material-icons">people</i>
+                REFERENCES
+            </div>
+            <p class="reference-text">
+                Available upon request
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 2026 CV Design
+    </div>
+</div>
+
+
+</body></html>
