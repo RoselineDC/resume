@@ -6,7 +6,7 @@ const fs = require('fs');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  const filePath = path.resolve(__dirname, 'modifiredCyBerJ.html');
+  const filePath = path.resolve(__dirname, 'modifiredCyberJ.html');
   await page.goto(`file://${filePath}`, { waitUntil: 'networkidle0' });
 
   // Define a clean output folder name
@@ -18,7 +18,7 @@ const fs = require('fs');
   }
 
   // Save the PDF safely inside the folder
-  const outputFile = path.join(outputDir, 'ROSELINE DANGAZELA Procurement Analyst.pdf');
+  const outputFile = path.join(outputDir, 'Roseline Dangazela – Business Development and Tenders Specialist.pdf');
 
   await page.pdf({
     path: outputFile,
