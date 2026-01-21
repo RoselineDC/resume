@@ -18,7 +18,7 @@ const fs = require('fs');
   }
 
   // Save the PDF safely inside the folder
-  const outputFile = path.join(outputDir, 'Roseline Dangazela Junior Software Engineer (Full-Stack).pdf');
+  const outputFile = path.join(outputDir, 'Roseline Dangazela -Junior Frontend Developer.pdf');
 
   await page.pdf({
     path: outputFile,
