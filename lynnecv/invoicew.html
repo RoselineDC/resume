@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sage-Style Accounting Templates</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Courier+Prime:wght@400;700&display=swap");
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-family: "Roboto", sans-serif;
+        display: flex;
+        justify-content: center;
+      }
+
+      .poster-container {
+        width: 100%;
+        min-height: 960px;
+        background-color: #f5f5f5;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        box-sizing: border-box;
+      }
+
+      .header-title {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #333;
+        width: 100%;
+      }
+
+      .header-title h1 {
+        margin: 0;
+        font-size: 36px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-bottom: 4px solid #333;
+        display: inline-block;
+        padding-bottom: 10px;
+      }
+
+      .header-title p {
+        margin-top: 10px;
+        font-size: 18px;
+        color: #555;
+      }
+
+      /* A4 Page Simulation */
+      .a4-page {
+        width: 100%;
+        background: white;
+        padding: 40px;
+        box-sizing: border-box;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        color: #000;
+        min-height: 1018px; /* A4 Aspect Ratio approx for 720px width */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .doc-title {
+        font-size: 32px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: right;
+      }
+
+      .header-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        /* margin-bottom: 30px; */
+        /* border-bottom: 2px solid #000; */
+        padding-bottom: 20px;
+      }
+
+      .company-info h2 {
+        margin: 0;
+        font-size: 24px;
+        text-transform: uppercase;
+      }
+
+      .company-info p {
+        /* margin: 5px 0; */
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .invoice-meta {
+        text-align: right;
+      }
+
+      .invoice-meta table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .invoice-meta td {
+        padding: 4px 0;
+        font-size: 12px;
+      }
+
+      .invoice-meta td:first-child {
+        font-weight: bold;
+        padding-right: 10px;
+      }
+
+      .bill-to {
+        margin-bottom: 30px;
+        margin-top: -10px;
+        text-align: right;
+      }
+
+      .bill-to h3 {
+        /* margin: 0 0 10px 0; */
+        font-size: 14px;
+        text-transform: uppercase;
+        background: #eee;
+        padding: 5px;
+        display: inline-block;
+      }
+
+      /* Tables */
+      .sage-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+        font-size: 12px;
+      }
+
+      .sage-table th {
+        border-bottom: 2px solid #000;
+        border-top: 2px solid #000;
+        padding: 8px;
+        text-align: left;
+        text-transform: uppercase;
+        background: #fff;
+      }
+
+      .sage-table td {
+        border-bottom: 1px solid #ddd;
+        padding: 8px;
+        vertical-align: top;
+      }
+
+      .sage-table .amount {
+        text-align: right;
+        font-family: "Courier Prime", monospace;
+      }
+
+      .sage-table .description {
+        width: 50%;
+      }
+
+      .totals-section {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 30px;
+      }
+
+      .totals-table {
+        width: 200px;
+        border-collapse: collapse;
+      }
+
+      .totals-table td {
+        padding: 5px;
+        font-size: 12px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .totals-table .total-line {
+        font-weight: bold;
+        font-size: 14px;
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
+      }
+
+      .notes-section {
+        font-size: 11px;
+        margin-bottom: 40px;
+        border: 1px dashed #999;
+        padding: 10px;
+      }
+
+      .signature-section {
+        display: flex;
+        justify-content: space-between;
+        margin-top: auto; /* Push to bottom */
+      }
+
+      .signature-box {
+        width: 45%;
+      }
+
+      .signature-line {
+        border-top: 1px solid #000;
+        margin-top: 40px;
+        padding-top: 5px;
+        font-size: 11px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      /* Receipt Specifics */
+      .receipt-header {
+        text-align: center;
+        margin: 40px 0;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        padding: 20px 0;
+      }
+
+      .receipt-amount {
+        font-size: 36px;
+        font-weight: bold;
+        margin: 20px 0;
+        text-decoration: underline;
+      }
+
+      /* Delivery Note Specifics */
+      .qty-col {
+        text-align: center;
+        width: 80px;
+      }
+
+      /* Helper Classes */
+      .uppercase {
+        text-transform: uppercase;
+      }
+      .bold {
+        font-weight: bold;
+      }
+      .text-right {
+        text-align: right;
+      }
+
+      /* Visual indicator for "No Prices" on Delivery Note */
+      .no-prices-note {
+        text-align: center;
+        font-style: italic;
+        color: #666;
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+      img {
+        width: 300px;
+        height: auto;
+        margin-top: -300x;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="poster-container">
+      <!-- TEMPLATE 1: INVOICE -->
+      <div class="a4-page">
+        <div class="doc-title">Tax Invoice</div>
+
+        <div class="header-section">
+            
+          <div class="company-info">
+            <div class="invoice-meta">
+              <img src="./Lumire're Logo (1).jpg" alt="imgae" />
+            </div>
+            <p>
+              88 Wooton Avenue <br />BENON<br />South Africa<br />Tel: +27 67
+              900 1246<br />Email: tatmawenison99@gmail.com
+            </p>
+          </div>
+
+          <div class="invoice-meta">
+            <table>
+              <tr>
+                <td>Invoice No:</td>
+                <td>INV-001001</td>
+              </tr>
+              <tr>
+                <td>Date:</td>
+                <td>27 Jan 2026</td>
+              </tr>
+              <tr>
+                <td>Customer No:</td>
+                <td>CUST-0055</td>
+              </tr>
+            </table>
+          </div>
+          
+        </div>
+         <div class="bill-to">
+          <h3>Bill To:</h3>
+          <div style="font-size: 12px">
+            <strong>Khwezi Mthembu</strong><br />
+            Stand 2950 Isihuluhulu Crescent Ext 4<br />eMbalenhle<br />2285<br />
+            <strong>Atn: Khwezi Mthembu +27 76 092 5915 </strong>
+          </div>
+        </div>
+
+        <table class="sage-table">
+          <thead>
+            <tr>
+              <th style="width: 50px">Code</th>
+              <th class="description">Description</th>
+              <th style="width: 60px">Qty</th>
+              <th class="amount">Unit Price</th>
+              <th class="amount">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>
+                DTF-Printer/30cm/Kit<br /><small
+                  >DTF-Printer/A3/30cm with 2 X XP600 Print Heads comes with
+                  powder shaker and a set of inks</small
+                >
+              </td>
+              <td class="amount">1.00</td>
+              <td class="amount">R68,000.00</td>
+              <td class="amount">R68,000.00</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>
+                Labour<br /><small
+                  >Printer Installation, Calibration and Software Training
+                </small>
+              </td>
+              <td class="amount">1.00</td>
+              <td class="amount">R2,500.00</td>
+              <td class="amount">R2,500.00</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Travel Cost<br /><small>Traveling Cost </small></td>
+              <td class="amount">1.00</td>
+              <td class="amount">R800.00</td>
+              <td class="amount">R800.00</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="totals-section">
+          <table class="totals-table">
+            <tr>
+              <td>Subtotal:</td>
+              <td class="text-right">R71,300.00</td>
+            </tr>
+            <tr class="total-line">
+              <td>Total:</td>
+              <td class="text-right">R71,300.00</td>
+            </tr>
+            <tr class="total-line">
+              <td>Balance Due:</td>
+              <td class="text-right">R71,300.00</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="notes-section">
+          <strong>Notes / Terms:</strong><br />
+          1. Payment is due within 30 days.<br />
+          2. Please include invoice number on your remittance slip.<br />
+          3. Bank: Your Bank Name | Sort: 00-00-00 | Acc: 12345678
+        </div>
+
+        <div class="signature-section">
+          <div class="signature-box">
+            <div class="signature-line">Supplier Signature</div>
+          </div>
+          <div class="signature-box">
+            <div class="signature-line">Client Signature</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TEMPLATE 2: RECEIPT -->
+      <!-- <div class="a4-page">
+        <div class="doc-title">Official Receipt</div>
+
+        <div
+          class="company-info"
+          style="text-align: center; margin-bottom: 20px"
+        >
+          <h2>Your Company Name</h2>
+          <p>123 Business Road, City, State</p>
+        </div>
+
+        <div class="receipt-header">
+          <p>Received with thanks from</p>
+          <h3 style="margin: 5px 0">Client Name Ltd.</h3>
+          <p>456 Client Avenue, Business Park</p>
+          <br />
+          <p>The sum of</p>
+          <div class="receipt-amount">$3,000.00</div>
+          <p>Three Thousand Dollars and 00/100 Only</p>
+          <br />
+          <p>For Invoice No: <strong>INV-001001</strong> Dated 27 Jan 2026</p>
+          <br />
+          <table style="margin: 0 auto; width: 300px; text-align: left">
+            <tr>
+              <td><strong>Payment Method:</strong></td>
+              <td>Bank Transfer</td>
+            </tr>
+            <tr>
+              <td><strong>Reference:</strong></td>
+              <td>TXN-99887766</td>
+            </tr>
+            <tr>
+              <td><strong>Date Received:</strong></td>
+              <td>27 Jan 2026</td>
+            </tr>
+          </table>
+        </div>
+
+        <div
+          style="
+            margin-top: 50px;
+            border-top: 1px solid #000;
+            padding-top: 20px;
+          "
+        >
+          <p><strong>Items Breakdown (Optional Detail):</strong></p>
+          <table class="sage-table" style="width: 80%; margin: 0 auto">
+            <tr>
+              <td>Consulting Services (INV-001001)</td>
+              <td class="amount">$1,500.00</td>
+            </tr>
+            <tr>
+              <td>Software License (INV-001001)</td>
+              <td class="amount">$500.00</td>
+            </tr>
+            <tr>
+              <td>Emergency Support (INV-001001)</td>
+              <td class="amount">$500.00</td>
+            </tr>
+            <tr>
+              <td>Tax Portion</td>
+              <td class="amount">$500.00</td>
+            </tr>
+            <tr class="total-line">
+              <td>Total Received</td>
+              <td class="amount">$3,000.00</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="signature-section" style="margin-top: auto">
+          <div class="signature-box">
+            <div class="signature-line">Authorized Signature</div>
+            <p style="font-size: 10px; text-align: center; margin-top: 5px">
+              For Your Company Name
+            </p>
+          </div>
+          <div class="signature-box">
+            <div class="signature-line">Received By</div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- TEMPLATE 3: DELIVERY NOTE -->
+      <!-- <div class="a4-page">
+        <div class="doc-title">Delivery Note</div>
+
+        <div class="header-section">
+          <div class="company-info">
+            <h2>Your Company Name</h2>
+            <p>123 Business Road<br />City, State, ZIP</p>
+          </div>
+          <div class="invoice-meta">
+            <table>
+              <tr>
+                <td>Delivery Note:</td>
+                <td>DN-001001</td>
+              </tr>
+              <tr>
+                <td>Date:</td>
+                <td>27 Jan 2026</td>
+              </tr>
+              <tr>
+                <td>Order Ref:</td>
+                <td>PO-9988</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            font-size: 12px;
+          "
+        >
+          <div>
+            <strong>Ship To:</strong><br />
+            Client Name Ltd.<br />
+            456 Client Avenue<br />
+            Business Park, City
+          </div>
+          <div style="text-align: right">
+            <strong>Carrier:</strong> FedEx Express<br />
+            <strong>Tracking #:</strong> 123456789012<br />
+            <strong>Delivery Date:</strong> 27 Jan 2026
+          </div>
+        </div>
+
+        <div class="no-prices-note">
+          This document confirms the delivery of goods. Prices are excluded.
+        </div>
+
+        <table class="sage-table">
+          <thead>
+            <tr>
+              <th style="width: 50px">Code</th>
+              <th class="description">Item Description</th>
+              <th class="qty-col">Qty Ordered</th>
+              <th class="qty-col">Qty Delivered</th>
+              <th class="amount">Signature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PROD05</td>
+              <td>
+                Annual Software License (Tier 2)<br /><small
+                  >Activation Key: XXXX-YYYY-ZZZZ</small
+                >
+              </td>
+              <td class="amount">1</td>
+              <td class="amount">1</td>
+              <td style="height: 40px; border-bottom: 1px solid #000"></td>
+            </tr>
+            <tr>
+              <td>HARD10</td>
+              <td>
+                External Hard Drive 2TB<br /><small>S/N: WD-123456789</small>
+              </td>
+              <td class="amount">2</td>
+              <td class="amount">2</td>
+              <td style="height: 40px; border-bottom: 1px solid #000"></td>
+            </tr>
+            <tr>
+              <td>MAN05</td>
+              <td>Printed User Manual Set</td>
+              <td class="amount">2</td>
+              <td class="amount">2</td>
+              <td style="height: 40px; border-bottom: 1px solid #000"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="notes-section">
+          <strong>Delivery Instructions:</strong><br />
+          Please inspect the goods immediately upon receipt. Any damage or
+          shortage must be noted on this document and reported within 24 hours.
+        </div>
+
+        <div class="signature-section">
+          <div class="signature-box">
+            <div class="signature-line">Delivered By</div>
+            <p style="font-size: 10px; text-align: center; margin-top: 5px">
+              Driver Name / ID
+            </p>
+          </div>
+          <div class="signature-box">
+            <div class="signature-line">Received In Good Condition</div>
+            <p style="font-size: 10px; text-align: center; margin-top: 5px">
+              Print Name & Date
+            </p>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div
+        style="
+          text-align: center;
+          color: #666;
+          font-size: 12px;
+          margin-top: 20px;
+        "
+      >
+        End of Templates. Press Ctrl+P (Windows) or Cmd+P (Mac) to print or save
+        as PDF.
+      </div> -->
+    </div>
+  </body>
+</html>

@@ -6,7 +6,7 @@ const fs = require('fs');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
-  const filePath = path.resolve(__dirname, 'ModifiedSE.html');
+  const filePath = path.resolve(__dirname, 'invoice.html');
   await page.goto(`file://${filePath}`, { waitUntil: 'networkidle0' });
 
   // Define a clean output folder name
@@ -18,13 +18,13 @@ const fs = require('fs');
   }
 
   // Save the PDF safely inside the folder
-  const outputFile = path.join(outputDir, 'Roseline Dangazela -Junior Frontend Developer.pdf');
+  const outputFile = path.join(outputDir, 'Delivery Note INV0000078.pdf');
 
   await page.pdf({
     path: outputFile,
     format: 'A4',
     printBackground: true,
-  });
+  })
 
   console.log('✅ PDF successfully created at:', outputFile);
 
